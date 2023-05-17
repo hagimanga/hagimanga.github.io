@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <link href="styles/menus.css" rel="stylesheet" type="text/css">
   <link href="styles/index.css" rel="stylesheet" type="text/css">
   <meta charset="UTF-8">
   <title>Page d'accueil</title>
@@ -8,18 +9,23 @@
 <body>
   <nav>
     <a class="active" href="index.html">Accueil</a>
-    <a href="#">TOP 100 Animés</a>
-    <a href="#">TOP 100 Mangas</a>
-    <a style="float:right" href="#">Se connecter</a>
+    <a href="top_10_auteurs.html">TOP 10 Auteurs</a>
+    <a href="top_10_mangas.html" >TOP 10 Mangas</a>
+    <!-- IF UTILISATEUR CONNECTE ALORS-->
+    <a style="float:right" href="#">monPseudo</a>
+    <!-- SINON -->
+    <a style="float:right" href="connexion.html">Se connecter</a>
   </nav>
   
   <div class="gallery">
+    <!-- Modèle à utiliser dans une boucle for:-->
     <figure>
       <a href="fiche.html">
         <img  src="images/img1.png" alt="Image 1">
       </a> 
       <figcaption>Oshi no Ko</figcaption>
     </figure>
+
     <figure>
       <a href="fiche.html"></a>
         <img src="images/img2.jpg" alt="Image 2">
@@ -59,9 +65,9 @@
   </div>
 
   <footer>
-    <p>&copy; 2023 Hagilist</p>
-    <a href="#">TOP 100 animés</a>
-    <a href="#">TOP 100 Mangas</a>
+    <p>&copy; 2023 Hagimanga</p>
+    <a href="top_10_animes.html">TOP 10 animés</a>
+    <a href="top_10_mangas.html">TOP 10 Mangas</a>
   </footer>
 </body>
 </html>

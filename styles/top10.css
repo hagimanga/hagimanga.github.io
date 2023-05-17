@@ -1,0 +1,41 @@
+body {    
+    background-color: #f5f5f5;
+}
+
+h1 {
+    text-align: center;
+}
+
+.manga-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.manga {
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.manga img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.manga h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.manga p {
+    font-size: 16px;
+    color: #888888;
+    margin-top: 0;
+}

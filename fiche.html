@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <link href="styles/index.css" rel="stylesheet" type="text/css">
+  <link href="styles/menus.css" rel="stylesheet" type="text/css">
   <link href="styles/fiche.css" rel="stylesheet" type="text/css">
   <meta charset="UTF-8">
   <title>Page d'accueil</title>
@@ -9,9 +9,12 @@
 <body>
   <nav>
     <a href="index.html">Accueil</a>
-    <a href="#">TOP 100 Animés</a>
-    <a href="#">TOP 100 Mangas</a>
-    <a style="float:right" href="#">Se connecter</a>
+    <a href="top_10_auteurs.html">TOP 10 Auteurs</a>
+    <a href="top_10_mangas.html" >TOP 10 Mangas</a>
+    <!-- IF UTILISATEUR CONNECTE ALORS-->
+    <a style="float:right" href="#">monPseudo</a>
+    <!-- SINON -->
+    <a style="float:right" href="connexion.html">Se connecter</a>
   </nav>
   
   <div class="content">
@@ -20,7 +23,9 @@
       <img src="images/img1.png" alt="Image du manga">
       <div class="info">
         <p><strong>Type :</strong> Shonen</p>
-        <p><strong>Auteur :</strong> Nom de l'auteur</p>
+        <a href="auteur.html">
+          <p><strong>Auteur :</strong> Mozart</p>
+        </a>
         <p><strong>Éditeur :</strong> Nom de l'éditeur</p>
         <p><strong>Date de parution :</strong> Janvier 2023</p>
         <div class="summary">
@@ -40,21 +45,20 @@
     <div class="reviews">
       <h2>Avis</h2>
       <div class="review">
-        <h3>Titre de l'avis 1</h3>
-        <p>Description de l'avis 1.</p>
+        <h3>Titre de l'avis 1: 9.9/10</h3>
+        <p>Excellent.</p>
       </div>
       <div class="review">
-        <h3>Titre de l'avis 2</h3>
-        <p>Description de l'avis 2.</p>
+        <h3>Titre de l'avis 2: 0/10</h3>
+        <p>Jaim pas</p>
       </div>
     </div>
   </div>
 
-
   <footer>
-    <p>&copy; 2023 Hagilist</p>
-    <a href="#">TOP 100 animés</a>
-    <a href="#">TOP 100 Mangas</a>
+    <p>&copy; 2023 Hagimanga</p>
+    <a href="top_10_animes.html">TOP 10 animés</a>
+    <a href="top_10_mangas.html">TOP 10 Mangas</a>
   </footer>
 </body>
 </html>
