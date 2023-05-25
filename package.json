@@ -1,6 +1,6 @@
 {
-  "name": "bdanilist.github.io",
-  "homepage": "https://hagimanga.github.io/public/",
+  "name": "hagimanga.github.io",
+  "homepage": "https://hagimanga.github.io/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
