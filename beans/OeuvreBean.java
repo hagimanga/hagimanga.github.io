@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+/*Auteur :Pierre Thuriès*/
 @Entity
 public class OeuvreBean {
 	

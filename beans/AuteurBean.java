@@ -1,11 +1,17 @@
 package beans;
 
+
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.Collection;
 import java.util.Date;
-
+/*Auteur :Pierre Thuriès*/
+@Entity
 public class AuteurBean {
-	
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	private String nom;
 
 	private String nationalite;

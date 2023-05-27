@@ -7,7 +7,7 @@ import java.util.Collections;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
+/*Auteur :Pierre Thuriès*/
 @Singleton
 public class Facade {
 
