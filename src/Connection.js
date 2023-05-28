@@ -24,7 +24,7 @@ const Connection = () => {
 
         if (res === true) {
           // Succès de la connexion
-          login(); // Met à jour l'état de connexion (~Variable Globale)
+          login(username); // Met à jour l'état de connexion (~Variable Globale)
           setLoginStatus('Connexion réussie');
         } else {
           // Échec de la connexion

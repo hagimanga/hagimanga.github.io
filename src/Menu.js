@@ -4,7 +4,7 @@ import { AuthContext } from './AuthContext';
 import './styles/menus.css';
 
 const Menu = () => {
-  const { isLoggedIn, login, logout } = useContext(AuthContext);
+  const { isLoggedIn, username, login, logout } = useContext(AuthContext);
   const location = useLocation();
   return (
     <nav>
@@ -15,7 +15,7 @@ const Menu = () => {
 
       {isLoggedIn  ? (
         <div>
-          <Link style={{ float: 'right' }} to="/">monPseudo</Link>
+          <Link style={{ float: 'right' }} to="/">{username}</Link>
           <Link style={{ float: 'right' }} onClick={logout} to="/">Se déconnecter</Link>
         </div>
       ) : (
