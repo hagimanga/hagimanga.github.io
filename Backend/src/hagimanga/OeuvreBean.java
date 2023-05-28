@@ -2,6 +2,7 @@ package hagimanga;
 
 import javax.persistence.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,7 +17,7 @@ public class OeuvreBean {
 	private String titreVO;
 	
 	/*Date de parution de l'oeuvre*/
-	private Date parution;
+	private String parution;
 	
 	/* Nombre de tome de l'oeuvre*/
 	private int nombreTome;
@@ -25,17 +26,17 @@ public class OeuvreBean {
 	
 	private String resume;
 
-	@ManyToMany(mappedBy="oeuvres")
-	Collection<AuteurBean> auteurs;
+	@ManyToMany(mappedBy="oeuvres", fetch=FetchType.EAGER)
+	Collection<AuteurBean> auteurs = new ArrayList<AuteurBean>(); 
 
-	@OneToMany(mappedBy="cible")
-	Collection<NoteBean> notes;
+	@OneToMany(mappedBy="cible", fetch=FetchType.EAGER)
+	Collection<NoteBean> notes = new ArrayList<NoteBean>(); 
 
-	@ManyToMany
-	Collection<GenreBean> genres;
+	@ManyToMany(mappedBy="oeuvresDuGenre",fetch=FetchType.EAGER)
+	Collection<GenreBean> genres = new ArrayList<GenreBean>(); 
 	
-	//@ManyToOne
-	//EditeurBean editeur;
+	@ManyToOne( fetch=FetchType.EAGER)
+	EditeurBean editeur;
 
 	public String getTitreFr() {
 		return titreFr;
@@ -53,11 +54,11 @@ public class OeuvreBean {
 		this.titreVO = titreVO;
 	}
 
-	public Date getParution() {
+	public String getParution() {
 		return parution;
 	}
 
-	public void setParution(Date parution) {
+	public void setParution(String parution) {
 		this.parution = parution;
 	}
 
@@ -92,9 +93,13 @@ public class OeuvreBean {
 		this.auteurs.add(a);
 	}
 	
-//	public void setEditeur(EditeurBean a) {
-//		this.editeur = a;
-//	}
+	public Collection<AuteurBean> getAuteurs() {
+		return this.auteurs;
+	}
+	
+	public void setEditeur(EditeurBean a) {
+		this.editeur = a;
+	}
 	
 	public void addGenre(GenreBean a) {
 		this.genres.add(a);
@@ -115,4 +120,5 @@ public class OeuvreBean {
 	public void setResume(String resume) {
 		this.resume = resume;
 	}
+	
 }

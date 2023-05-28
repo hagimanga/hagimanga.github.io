@@ -1,13 +1,8 @@
 package hagimanga;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
-
-import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.persistence.*;
 
@@ -57,6 +52,22 @@ public class Facade {
 		return em.createQuery("from OeuvreBean",OeuvreBean.class).getResultList();
 	}
 	
+	public OeuvreBean getOeuvre(int id) {
+		return em.find(OeuvreBean.class, id);
+	}
+	
+	public AuteurBean getAuteur(int id) {
+		return em.find(AuteurBean.class, id);
+	}
+	
+	public EditeurBean getEditeur(int id) {
+		return em.find(EditeurBean.class, id);
+	}
+	
+	public GenreBean getGenre(int id) {
+		return em.find(GenreBean.class, id);
+	}
+	
 	/* Pour Obtenir les oeurvres les mieux notées*/
 	public ArrayList<OeuvreBean> getTopOeuvres(){
 		ArrayList<OeuvreBean> oeuvres = new ArrayList(this.listeOeuvres());
@@ -90,7 +101,7 @@ public class Facade {
 //	}
 	
 	public void associerOeuvreGenre(int oeuvreId,int genreId) {
-		em.find(OeuvreBean.class, oeuvreId).addGenre(em.find(GenreBean.class, genreId));
+		em.find(GenreBean.class, genreId).addOeuvre(em.find(OeuvreBean.class, oeuvreId));
 	}
 	
 	public void associerOeuvreNote(int oeuvreId,int noteId) {
@@ -101,8 +112,4 @@ public class Facade {
 		em.find(NoteBean.class, noteId).setCompte(em.find(CompteUtilisateurBean.class, utilisateurId));
 	}
 	
-	@PostConstruct
-	 public void initialisation() {
-		
-	 }
 }

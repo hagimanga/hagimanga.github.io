@@ -15,8 +15,8 @@ public class GenreBean {
 	
 	private String description;
 	
-	@ManyToMany(mappedBy="genres")
-	Collection<OeuvreBean> oeuvres;
+	@ManyToMany
+	Collection<OeuvreBean> oeuvresDuGenre;
 
 	public String getDescription() {
 		return description;
@@ -33,4 +33,14 @@ public class GenreBean {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	@Override
+	public String toString() {
+		return "GenreBean [id=" + id + ", nom=" + nom + ", description=" + description + "]";
+	}
+
+	public void addOeuvre(OeuvreBean find) {
+		this.oeuvresDuGenre.add(find);	
+	}
+	
 }

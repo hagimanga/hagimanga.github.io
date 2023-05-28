@@ -25,9 +25,10 @@ public class API extends HttpServlet {
       
 	@EJB
 	private Facade facade;
+
 	
     private String convertToJson(Object data) {
-        // Utilisez une biblioth�que JSON comme Gson pour convertir les objets en JSON
+        // Utilisez une biblioth�que JSON comme Gson pour convertir les objets en JSON
         // par exemple, si vous utilisez Gson :
         Gson gson = new Gson();
         return gson.toJson(data);
@@ -46,17 +47,14 @@ public class API extends HttpServlet {
 		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
-//		AuteurBean auth = new AuteurBean();
-//		auth.setGenre(0);
-//		auth.setNaissance(new Date());
-//		auth.setNationalite("Francais");
-//		auth.setNom("Mozart");
-//		facade.addAuteur(auth);
-//		
+	private void initFacade() {
+		AuteurBean oda = new AuteurBean();
+		oda.setGenre(0);
+		oda.setNaissance("1er Janvier 1975");
+		oda.setNationalite("Japonais");
+		oda.setNom("Eiichiro Oda");
+		facade.addAuteur(oda);
+		
 //		AuteurBean auth2 = new AuteurBean();
 //		auth2.setGenre(0);
 //		auth2.setNaissance(new Date());
@@ -64,30 +62,40 @@ public class API extends HttpServlet {
 //		auth2.setNom("TestNom");
 //		facade.addAuteur(auth2);
 //		
-//		EditeurBean ed = new EditeurBean();
-//		ed.setNom("TESTEDITEURNOM");
-//		facade.addEditeur(ed);
-//		
-//		OeuvreBean oeuvre = new OeuvreBean();
-//		oeuvre.setImage(new URL("https://fr.web.img5.acsta.net/pictures/19/08/09/14/53/1842996.jpg"));
-//		//oeuvre.setEditeur(ed);
-//		oeuvre.setNombreTome(99);
-//		oeuvre.setTitreFr("One Piece");
-//		oeuvre.setTitreVO("titre vo");		
-//		facade.addOeuvre(oeuvre);
+		EditeurBean shueisha = new EditeurBean();
+		shueisha.setNom("Shueisha");
+		facade.addEditeur(shueisha);
+		
+		GenreBean nekketsu = new GenreBean();
+		//nekketsu.setNom("Nekketsu");
+		//nekketsu.setDescription("BouBoum");
+		facade.addGenre(nekketsu);
+		
+		OeuvreBean oeuvre = new OeuvreBean();
+		try {
+			oeuvre.setImage(new URL("https://fr.web.img5.acsta.net/pictures/19/08/09/14/53/1842996.jpg"));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		oeuvre.setEditeur(shueisha);
+		oeuvre.setParution("22 Juillet 1997");
+		oeuvre.setNombreTome(105);
+		oeuvre.setTitreFr("One Piece");
+		oeuvre.setTitreVO("ワンピース");	
+		oeuvre.addAuteur(oda);
+		oeuvre.addGenre(nekketsu);
+		facade.addOeuvre(oeuvre);
+	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+		
+		this.initFacade();
 
-		TestBean t1 = new TestBean();
-		t1.setNom("AAA");
-		facade.addTest(t1);
-		
-		TestBean t2 = new TestBean();
-		t2.setNom("BBB");
-		facade.addTest(t2);
-		
-		TestBean t3 = new TestBean();
-		t3.setNom("CCC");
-		facade.addTest(t3);		
-		
+			
 		String action = request.getParameter("action");	
 		if (action.equals("getTop10Mangas")) {
             ArrayList<OeuvreBean> topMangas = facade.getTopOeuvres();
@@ -98,8 +106,28 @@ public class API extends HttpServlet {
             String json = convertToJson(topAuteurs);
             sendJsonResponse(response, json);
         } else if (action.equals("getTests")) {
-        	Collection<TestBean> tests = facade.listeTests();
+        	Collection<OeuvreBean> tests = facade.listeOeuvres();
             String json = convertToJson(tests);
+            sendJsonResponse(response, json);
+        }
+        else if (action.equals("getManga")) {
+        	int id = Integer.parseInt(request.getParameter("Id"));
+            String json = convertToJson(facade.getOeuvre(id));
+            sendJsonResponse(response, json);
+        }
+        else if (action.equals("getAuteur")) {
+        	int id = Integer.parseInt(request.getParameter("Id"));
+            String json = convertToJson(facade.getAuteur(id));
+            sendJsonResponse(response, json);
+        }
+        else if (action.equals("getEditeur")) {
+        	int id = Integer.parseInt(request.getParameter("Id"));
+            String json = convertToJson(facade.getEditeur(id));
+            sendJsonResponse(response, json);
+        }
+        else if (action.equals("getGenre")) {
+        	int id = Integer.parseInt(request.getParameter("Id"));
+            String json = convertToJson(facade.getGenre(id));
             sendJsonResponse(response, json);
         }
 	}

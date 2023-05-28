@@ -8,6 +8,12 @@ import java.util.Date;
 @Entity
 public class AuteurBean {
 
+	@Override
+	public String toString() {
+		return "AuteurBean [id=" + id + ", nom=" + nom + ", nationalite=" + nationalite + ", genre=" + genre
+				+ ", naissance=" + naissance + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
@@ -17,7 +23,7 @@ public class AuteurBean {
 
 	private int genre;
 
-	private Date naissance;
+	private String naissance;
 	
 	@ManyToMany
 	Collection<OeuvreBean> oeuvres;
@@ -46,11 +52,11 @@ public class AuteurBean {
 		this.genre = genre;
 	}
 
-	public Date getNaissance() {
+	public String getNaissance() {
 		return naissance;
 	}
 
-	public void setNaissance(Date naissance) {
+	public void setNaissance(String naissance) {
 		this.naissance = naissance;
 	}
 	
