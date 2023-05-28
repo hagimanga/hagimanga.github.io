@@ -1,1 +1,0 @@
-# hagimanga.github.io
