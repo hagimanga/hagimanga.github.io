@@ -86,6 +86,17 @@ public class API extends HttpServlet {
 		oeuvre.addAuteur(oda);
 		oeuvre.addGenre(nekketsu);
 		facade.addOeuvre(oeuvre);
+		
+		CompteUtilisateurBean baba = new CompteUtilisateurBean();
+		baba.setPseudo("Baba");
+		baba.setInscription("31 février 2000,5");
+		baba.setMotDePassse("Bobo");
+		
+		NoteBean noteBaba = new NoteBean();
+		noteBaba.setCible(oeuvre);
+		noteBaba.setCompte(baba);
+		noteBaba.setNote(20);
+		noteBaba.setDetail(";P");
 	}
 	
 	/**

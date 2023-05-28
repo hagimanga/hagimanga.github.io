@@ -12,7 +12,7 @@ public class CompteUtilisateurBean {
 	private int id;
     private String pseudo;
 
-    private Date inscription;
+    private String inscription;
     
     private String motDePassse;
 
@@ -27,11 +27,11 @@ public class CompteUtilisateurBean {
 		this.pseudo = pseudo;
 	}
 
-	public Date getInscription() {
+	public String getInscription() {
 		return inscription;
 	}
 
-	public void setInscription(Date inscription) {
+	public void setInscription(String inscription) {
 		this.inscription = inscription;
 	}
 
