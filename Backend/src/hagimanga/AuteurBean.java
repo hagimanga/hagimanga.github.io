@@ -22,7 +22,7 @@ public class AuteurBean {
 	private String nationalite;
 
 	@Expose
-	private int genre;
+	private String genre;
 
 	@Expose
 	private String naissance;
@@ -46,11 +46,11 @@ public class AuteurBean {
 		this.nationalite = nationalite;
 	}
 
-	public int getGenre() {
+	public String getGenre() {
 		return genre;
 	}
 
-	public void setGenre(int genre) {
+	public void setGenre(String genre) {
 		this.genre = genre;
 	}
 

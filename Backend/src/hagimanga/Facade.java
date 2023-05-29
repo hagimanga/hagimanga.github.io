@@ -68,8 +68,8 @@ public class Facade {
 		return em.find(GenreBean.class, id);
 	}
 	
-	public CompteUtilisateurBean getCompte(int id) {
-		return em.find(CompteUtilisateurBean.class, id);
+	public CompteUtilisateurBean getCompte(String Pseudo) {
+		return em.find(CompteUtilisateurBean.class, Pseudo);
 	}
 	
 	/* Pour Obtenir les oeurvres les mieux notées*/
@@ -86,6 +86,14 @@ public class Facade {
 	
 	public Collection<TestBean> listeTests(){
 		return em.createQuery("from TestBean",TestBean.class).getResultList();
+	}
+	
+	public Collection<GenreBean> listeGenres(){
+		return em.createQuery("from GenreBean",GenreBean.class).getResultList();
+	}
+	
+	public Collection<EditeurBean> listeEditeurs(){
+		return em.createQuery("from EditeurBean",EditeurBean.class).getResultList();
 	}
 	
 	/* Pour Obtenir les auteurs les mieux notés*/
@@ -112,8 +120,16 @@ public class Facade {
 		em.find(NoteBean.class, noteId).setCible(em.find(OeuvreBean.class,oeuvreId));
 	}
 	
-	public void associerNoteUtilisateur(int noteId,int utilisateurId) {
+	public void associerNoteUtilisateur(int noteId,String utilisateurId) {
 		em.find(NoteBean.class, noteId).setCompte(em.find(CompteUtilisateurBean.class, utilisateurId));
+	}
+	
+	public boolean connexion(String pseudo,String mdp) {
+		if (em.find(CompteUtilisateurBean.class, pseudo)!=null)
+		return em.find(CompteUtilisateurBean.class, pseudo).verif(mdp);
+		else {
+			return false;
+		}
 	}
 	
 }

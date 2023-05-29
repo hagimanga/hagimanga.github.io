@@ -10,9 +10,6 @@ import com.google.gson.annotations.Expose;
 public class CompteUtilisateurBean {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Expose
-	private int id;
 	@Expose
     private String pseudo;
 
@@ -47,5 +44,9 @@ public class CompteUtilisateurBean {
 
 	public void setMotDePassse(String motDePassse) {
 		this.motDePassse = motDePassse;
+	}
+	
+	public boolean verif(String mdp) {
+		return mdp.equals(this.motDePassse);
 	}
 }
