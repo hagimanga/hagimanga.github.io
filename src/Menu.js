@@ -15,6 +15,7 @@ const Menu = () => {
 
       {isLoggedIn  ? (
         <div>
+          <Link to="/ajout-donnees" className={location.pathname === '/ajout-donnees' ? 'active' : ''}>Ajouter des données</Link>
           <Link style={{ float: 'right' }} to="/">{username}</Link>
           <Link style={{ float: 'right' }} onClick={logout} to="/">Se déconnecter</Link>
         </div>

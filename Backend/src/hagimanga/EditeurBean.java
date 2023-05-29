@@ -12,8 +12,8 @@ public class EditeurBean {
 	private int id;
 	private String nom;
 	
-    //@OneToMany(mappedBy="editeur")
-    //Collection<OeuvreBean> oeuvresDeEditeur;
+    @OneToMany(mappedBy="editeur")
+    Collection<OeuvreBean> oeuvresDeEditeur;
 
 	public String getNom() {
 		return nom;
