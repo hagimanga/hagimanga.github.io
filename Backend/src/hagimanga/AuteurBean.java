@@ -73,7 +73,11 @@ public class AuteurBean {
 			nombreNote = nombreNote + 1;
 			result = result + i.getMoyenneNote();
 		}
+		if(nombreNote!=0)
 		return result/nombreNote;
+		else {
+			return 0;
+		}
 	}
 	
 	public void addOeuvres(OeuvreBean a) {
