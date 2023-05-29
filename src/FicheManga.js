@@ -2,38 +2,38 @@ import React, { useEffect, useState } from 'react';
 import './styles/ficheManga.css';
 
 function FicheManga(props) {
-//   const [manga, setManga] = useState(null);
+  const [manga, setManga] = useState(null);
 
-//   useEffect(() => {
-//     const { id } = props.match.params;
-//     const apiUrl = `http://localhost:8080/Backend/API?action=getManga&id=${id}`;
+  useEffect(() => {
+    const { id } = props.match.params;
+    const apiUrl = `http://localhost:8080/Backend/API?action=getManga&Id=${id}`;
 
-//     fetch(apiUrl)
-//       .then(response => response.json())
-//       .then(data => setManga(data))
-//       .catch(error => console.error(error));
-//   }, []);
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => setManga(data))
+      .catch(error => console.error(error));
+  }, []);
 
-//   if (!manga) {
-//     return <div>Loading...</div>;
-//   }
+  if (!manga) {
+    return <div>Loading...</div>;
+  }
 
-  const manga = {
-    id: 1,
-    titreFr: "One Piece",
-    titreVO: "ワンピース",
-    parution: "22 juillet 1997",
-    nombreTome: 100,
-    image: "https://www.glenat.com/sites/default/files/images/livres/couv/9782723488525-T.jpg",
-    resume: "One Piece est un manga d'aventure écrit et dessiné par Eiichiro Oda. L'histoire suit les aventures de Monkey D. Luffy, un jeune garçon dont le corps a acquis les propriétés du caoutchouc après avoir mangé accidentellement un fruit du démon. Luffy explore le monde à la recherche du trésor ultime connu sous le nom de One Piece, dans l'espoir de devenir le roi des pirates.",
-    auteurs: [],
-    notes: [],
-    genres: [],
-    editeur: {
-      id: 1,
-      nom: "Shueisha"
-    }
-  };
+//   const manga = {
+//     id: 1,
+//     titreFr: "One Piece",
+//     titreVO: "ワンピース",
+//     parution: "22 juillet 1997",
+//     nombreTome: 100,
+//     image: "https://www.glenat.com/sites/default/files/images/livres/couv/9782723488525-T.jpg",
+//     resume: "One Piece est un manga d'aventure écrit et dessiné par Eiichiro Oda. L'histoire suit les aventures de Monkey D. Luffy, un jeune garçon dont le corps a acquis les propriétés du caoutchouc après avoir mangé accidentellement un fruit du démon. Luffy explore le monde à la recherche du trésor ultime connu sous le nom de One Piece, dans l'espoir de devenir le roi des pirates.",
+//     auteurs: [],
+//     notes: [],
+//     genres: [],
+//     editeur: {
+//       id: 1,
+//       nom: "Shueisha"
+//     }
+//   };
 
   return (
     <div className="fiche-manga">
