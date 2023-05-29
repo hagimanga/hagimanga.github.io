@@ -33,10 +33,12 @@ const AjoutManga = () => {
       nombreTome: event.target.elements['nombreTome'].value,
       image: event.target.elements['image'].value,
       resume: event.target.elements['resume'].value,
-      auteur: event.target.elements['auteur'].value,
-      genre: event.target.elements['genre'].value,
-      editeur: event.target.elements['editeur'].value
+      auteur: event.target.elements['auteur']['id'].value,
+      genre: event.target.elements['genre']['id'].value,
+      editeur: event.target.elements['editeur']['id'].value
     };
+
+    console.log(JSON.stringify(formData));   
 
     // Envoyer les données à l'API en utilisant fetch
     fetch('http://localhost:8080/Backend/API?action=addManga', {
@@ -45,14 +47,12 @@ const AjoutManga = () => {
     })
     .then(response => response.json())
     .then(data => {
-      // Gérer la réponse de l'API, afficher un message de succès ou d'erreur, etc.
       console.log(data);
       // Rediriger vers une autre page
       history.push('/ajout-donnees');
     })
     .catch(error => {
       console.error(error);
-      // Afficher un message d'erreur
     });
   };
 

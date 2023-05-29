@@ -7,7 +7,7 @@ const TopMangas = () => {
 
   useEffect(() => {
     // Faire une requête au backend pour obtenir le top 10 des mangas
-    fetch('http://localhost:8080/Backend/API?action=getTop10Mangas')
+    fetch('http://localhost:8080/Backend/API?action=getTopMangas')
       .then(response => response.json())
       .then(data => setTopMangas(data.slice(0, 10))); // Limiter à 10 mangas
   }, []);

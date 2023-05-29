@@ -7,7 +7,7 @@ const TopAuteurs = () => {
 
   useEffect(() => {
     // Faire une requête au backend pour obtenir le top 10 des auteurs
-    fetch('http://localhost:8080/Backend/API?action=getTop10Auteurs')
+    fetch('http://localhost:8080/Backend/API?action=getTopAuteurs')
       .then(response => response.json())
       .then(data => setTopAuteurs(data));
   }, []);

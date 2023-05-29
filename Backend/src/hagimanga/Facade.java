@@ -77,7 +77,7 @@ public class Facade {
 	}
 	
 	public Collection<AuteurBean> listeAuteurs(){
-		return em.createQuery("from Auteur",AuteurBean.class).getResultList();
+		return em.createQuery("from AuteurBean",AuteurBean.class).getResultList();
 	}
 	
 	public Collection<TestBean> listeTests(){

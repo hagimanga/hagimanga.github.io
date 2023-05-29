@@ -11,7 +11,7 @@ import FicheManga from './FicheManga';
 import AjoutDonnees from './AjoutDonnees';
 import AjoutManga from './AjoutManga';
 import ListeTests from './ListeTests.js';
-import Connection from './Connection.js';
+import Connexion from './Connexion.js';
 import Inscription from './Inscription.js';
 import Menu from './Menu.js';
 import Footer from './Footer.js';
@@ -28,7 +28,7 @@ function App() {
             <Route path="/ajout-donnees" component={AjoutDonnees} />
             <Route path="/ajout-manga" component={AjoutManga} />
             <Route path="/manga/:id" component={FicheManga} />
-            <Route path="/connection" component={Connection} />
+            <Route path="/connexion" component={Connexion} />
             <Route path="/inscription" component={Inscription} />
             <Route path="/test" component={ListeTests} />
             <Footer />

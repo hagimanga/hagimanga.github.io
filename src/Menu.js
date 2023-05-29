@@ -20,7 +20,7 @@ const Menu = () => {
           <Link style={{ float: 'right' }} onClick={logout} to="/">Se déconnecter</Link>
         </div>
       ) : (
-        <Link style={{ float: 'right' }} to="/connection" className={location.pathname === '/connection' ? 'active' : ''}>Se connecter</Link>
+        <Link style={{ float: 'right' }} to="/connexion" className={location.pathname === '/connexion' ? 'active' : ''}>Se connecter</Link>
       )}
       </nav>
   );
