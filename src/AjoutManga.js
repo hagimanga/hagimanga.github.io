@@ -9,6 +9,10 @@ const AjoutManga = () => {
 
   const history = useHistory();
 
+  const [selectedAuteurId, setSelectedAuteurId] = useState('');
+  const [selectedGenreId, setSelectedGenreId] = useState('');
+  const [selectedEditeurId, setSelectedEditeurId] = useState('');
+
   useEffect(() => {
     fetch('http://localhost:8080/Backend/API?action=getAuteurs')
       .then(response => response.json())
@@ -32,9 +36,6 @@ const AjoutManga = () => {
     const nombreTome = event.target.elements['nombreTome'].value;
     const image = event.target.elements['image'].value;
     const resume = event.target.elements['resume'].value;
-    const auteurId = event.target.elements['auteur']['id'].value;
-    const genreId = event.target.elements['genre']['id'].value;
-    const editeurId = event.target.elements['editeur']['id'].value;
 
     // Envoyer les données à l'API en utilisant l'URL avec les bons paramètres
     const url = new URL('http://localhost:8080/Backend/API');
@@ -45,9 +46,9 @@ const AjoutManga = () => {
     url.searchParams.append('nombreTome', nombreTome);
     url.searchParams.append('image', image);
     url.searchParams.append('resume', resume);
-    url.searchParams.append('auteurId', auteurId);
-    url.searchParams.append('genreId', genreId);
-    url.searchParams.append('editeurId', editeurId);
+    url.searchParams.append('auteur', selectedAuteurId);
+    url.searchParams.append('genre', selectedGenreId);
+    url.searchParams.append('editeur', selectedEditeurId);
 
     fetch(url, {
     method: 'POST'
@@ -63,6 +64,7 @@ const AjoutManga = () => {
     history.push('/ajout-donnees');
     })
     .catch(error => {
+    console.log(url);
     console.error(error);
     });
   };
@@ -103,7 +105,7 @@ const AjoutManga = () => {
 
             <div className="form-group">
                 <label htmlFor="auteur">Auteur:</label>
-                <select id="auteur" name="auteur">
+                <select id="auteur" name="auteur" onChange={(e) => setSelectedAuteurId(e.target.value)} required>
                     <option value="">Sélectionner un auteur</option>
                     {auteurs.map(auteur => (
                     <option key={auteur.id} value={auteur.id}>{auteur.nom}</option>
@@ -113,7 +115,7 @@ const AjoutManga = () => {
 
             <div className="form-group">
                 <label htmlFor="genre">Genre:</label>
-                <select id="genre" name="genre">
+                <select id="genre" name="genre" onChange={(e) => setSelectedGenreId(e.target.value)} required>
                     <option value="">Sélectionner un genre</option>
                     {genres.map(genre => (
                     <option key={genre.id} value={genre.id}>{genre.nom}</option>
@@ -123,7 +125,7 @@ const AjoutManga = () => {
 
             <div className="form-group">
                 <label htmlFor="editeur">Éditeur:</label>
-                <select id="editeur" name="editeur">
+                <select id="editeur" name="editeur" onChange={(e) => setSelectedEditeurId(e.target.value)} required>
                     <option value="">Sélectionner un éditeur</option>
                     {editeurs.map(editeur => (
                     <option key={editeur.id} value={editeur.id}>{editeur.nom}</option>

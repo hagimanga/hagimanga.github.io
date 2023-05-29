@@ -12,6 +12,7 @@ import AjoutDonnees from './AjoutDonnees';
 import AjoutManga from './AjoutManga';
 import AjoutEditeur from './AjoutEditeur';
 import AjoutAuteur from './AjoutAuteur';
+import AjoutGenre from './AjoutGenre';
 import ListeTests from './ListeTests.js';
 import Connexion from './Connexion.js';
 import Inscription from './Inscription.js';
@@ -34,6 +35,7 @@ function App() {
             <Route path="/ajout-manga" component={AjoutManga} />
             <Route path="/ajout-editeur" component={AjoutEditeur} />
             <Route path="/ajout-auteur" component={AjoutAuteur} />
+            <Route path="/ajout-genre" component={AjoutGenre} />
             <Route path="/manga/:id" component={FicheManga} />
             <Route path="/connexion" component={Connexion} />
             <Route path="/inscription" component={Inscription} />
