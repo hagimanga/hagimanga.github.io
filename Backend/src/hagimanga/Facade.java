@@ -68,6 +68,10 @@ public class Facade {
 		return em.find(GenreBean.class, id);
 	}
 	
+	public CompteUtilisateurBean getCompte(int id) {
+		return em.find(CompteUtilisateurBean.class, id);
+	}
+	
 	/* Pour Obtenir les oeurvres les mieux notées*/
 	public ArrayList<OeuvreBean> getTopOeuvres(){
 		ArrayList<OeuvreBean> oeuvres = new ArrayList(this.listeOeuvres());
@@ -93,15 +97,15 @@ public class Facade {
 	}
 	
 	public void associerOeuvreAuteur(int oeuvreId,int auteurId) {
-		em.find(AuteurBean.class, auteurId).addOeuvres(em.find(OeuvreBean.class, oeuvreId));
+		em.find(OeuvreBean.class, oeuvreId).setAuteur(em.find(AuteurBean.class, auteurId));
 	}
 	
-//	public void associerOeuvreEditeur(int oeuvreId,int editeurId) {
-//		em.find(OeuvreBean.class, oeuvreId).setEditeur(em.find(EditeurBean.class, editeurId));
-//	}
+	public void associerOeuvreEditeur(int oeuvreId,int editeurId) {
+		em.find(OeuvreBean.class, oeuvreId).setEditeur(em.find(EditeurBean.class, editeurId));
+	}
 	
 	public void associerOeuvreGenre(int oeuvreId,int genreId) {
-		em.find(GenreBean.class, genreId).addOeuvre(em.find(OeuvreBean.class, oeuvreId));
+		em.find(OeuvreBean.class, oeuvreId).setGenre(em.find(GenreBean.class, genreId));
 	}
 	
 	public void associerOeuvreNote(int oeuvreId,int noteId) {

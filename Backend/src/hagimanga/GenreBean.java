@@ -3,19 +3,24 @@ package hagimanga;
 import java.util.Collection;
 
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
 /*Auteur :Pierre Thuriès*/
 @Entity
 public class GenreBean {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Expose
 	private int id;
 	
+	@Expose
 	private String nom;
 	
+	@Expose
 	private String description;
 	
-	@ManyToMany
+	@OneToMany(mappedBy="genre", fetch=FetchType.EAGER)
 	Collection<OeuvreBean> oeuvresDuGenre;
 
 	public String getDescription() {

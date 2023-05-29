@@ -1,31 +1,33 @@
 package hagimanga;
 
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
+
 import java.util.Collection;
-import java.util.Date;
 /*Auteur :Pierre Thuriès*/
 
 @Entity
 public class AuteurBean {
 
-	@Override
-	public String toString() {
-		return "AuteurBean [id=" + id + ", nom=" + nom + ", nationalite=" + nationalite + ", genre=" + genre
-				+ ", naissance=" + naissance + "]";
-	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Expose
 	private int id;
+	@Expose
 	private String nom;
 
+	@Expose
 	private String nationalite;
 
+	@Expose
 	private int genre;
 
+	@Expose
 	private String naissance;
 	
-	@ManyToMany
+	@OneToMany(mappedBy="auteur", fetch=FetchType.EAGER)
 	Collection<OeuvreBean> oeuvres;
 
 	public String getNom() {

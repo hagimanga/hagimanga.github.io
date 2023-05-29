@@ -4,16 +4,22 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
 @Entity
 public class CompteUtilisateurBean {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Expose
 	private int id;
+	@Expose
     private String pseudo;
 
+    @Expose
     private String inscription;
     
+    @Expose
     private String motDePassse;
 
     @OneToMany(mappedBy="compte")

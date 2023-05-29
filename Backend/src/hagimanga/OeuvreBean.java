@@ -1,6 +1,9 @@
 package hagimanga;
 
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,31 +14,42 @@ public class OeuvreBean {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Expose
 	private int id;
 	
+	@Expose
 	private String titreFr;
+	@Expose
 	private String titreVO;
 	
 	/*Date de parution de l'oeuvre*/
+	@Expose
 	private String parution;
 	
 	/* Nombre de tome de l'oeuvre*/
+	@Expose
 	private int nombreTome;
 	
+	@Expose
 	private URL image;
 	
+	@Expose
 	private String resume;
 
-	@ManyToMany(mappedBy="oeuvres", fetch=FetchType.EAGER)
-	Collection<AuteurBean> auteurs = new ArrayList<AuteurBean>(); 
+	@Expose
+	@ManyToOne
+	AuteurBean auteur;
 
+	
 	@OneToMany(mappedBy="cible", fetch=FetchType.EAGER)
 	Collection<NoteBean> notes = new ArrayList<NoteBean>(); 
 
-	@ManyToMany(mappedBy="oeuvresDuGenre",fetch=FetchType.EAGER)
-	Collection<GenreBean> genres = new ArrayList<GenreBean>(); 
+	@Expose
+	@ManyToOne
+	GenreBean genre;
 	
-	@ManyToOne( fetch=FetchType.EAGER)
+	@ManyToOne
+	@Expose
 	EditeurBean editeur;
 
 	public String getTitreFr() {
@@ -89,20 +103,25 @@ public class OeuvreBean {
 		}		
 	}
 	
-	public void addAuteur(AuteurBean a) {
-		this.auteurs.add(a);
-	}
-	
-	public Collection<AuteurBean> getAuteurs() {
-		return this.auteurs;
-	}
 	
 	public void setEditeur(EditeurBean a) {
 		this.editeur = a;
 	}
-	
-	public void addGenre(GenreBean a) {
-		this.genres.add(a);
+
+	public AuteurBean getAuteur() {
+		return auteur;
+	}
+
+	public void setAuteur(AuteurBean auteur) {
+		this.auteur = auteur;
+	}
+
+	public GenreBean getGenre() {
+		return genre;
+	}
+
+	public void setGenre(GenreBean genre) {
+		this.genre = genre;
 	}
 
 	public URL getImage() {

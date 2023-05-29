@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * Servlet implementation class API
@@ -30,7 +31,7 @@ public class API extends HttpServlet {
     private String convertToJson(Object data) {
         // Utilisez une biblioth�que JSON comme Gson pour convertir les objets en JSON
         // par exemple, si vous utilisez Gson :
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.toJson(data);
 	}
 
@@ -67,8 +68,8 @@ public class API extends HttpServlet {
 		facade.addEditeur(shueisha);
 		
 		GenreBean nekketsu = new GenreBean();
-		//nekketsu.setNom("Nekketsu");
-		//nekketsu.setDescription("BouBoum");
+		nekketsu.setNom("Nekketsu");
+		nekketsu.setDescription("BouBoum");
 		facade.addGenre(nekketsu);
 		
 		OeuvreBean oeuvre = new OeuvreBean();
@@ -83,20 +84,22 @@ public class API extends HttpServlet {
 		oeuvre.setNombreTome(105);
 		oeuvre.setTitreFr("One Piece");
 		oeuvre.setTitreVO("ワンピース");	
-		oeuvre.addAuteur(oda);
-		oeuvre.addGenre(nekketsu);
+		oeuvre.setAuteur(oda);
+		oeuvre.setGenre(nekketsu);
 		facade.addOeuvre(oeuvre);
 		
 		CompteUtilisateurBean baba = new CompteUtilisateurBean();
 		baba.setPseudo("Baba");
 		baba.setInscription("31 février 2000,5");
 		baba.setMotDePassse("Bobo");
+		facade.addCompteUtilisateur(baba);
 		
 		NoteBean noteBaba = new NoteBean();
 		noteBaba.setCible(oeuvre);
 		noteBaba.setCompte(baba);
 		noteBaba.setNote(20);
 		noteBaba.setDetail(";P");
+		facade.addNote(noteBaba);
 	}
 	
 	/**
@@ -108,11 +111,11 @@ public class API extends HttpServlet {
 
 			
 		String action = request.getParameter("action");	
-		if (action.equals("getTop10Mangas")) {
+		if (action.equals("getTopMangas")) {
             ArrayList<OeuvreBean> topMangas = facade.getTopOeuvres();
             String json = convertToJson(topMangas);
             sendJsonResponse(response, json);
-        } else if (action.equals("getTop10Auteurs")) {
+        } else if (action.equals("getTopAuteurs")) {
         	ArrayList<AuteurBean> topAuteurs = facade.getTopAuteurs();
             String json = convertToJson(topAuteurs);
             sendJsonResponse(response, json);
@@ -140,6 +143,79 @@ public class API extends HttpServlet {
         	int id = Integer.parseInt(request.getParameter("Id"));
             String json = convertToJson(facade.getGenre(id));
             sendJsonResponse(response, json);
+        }
+        else if (action.equals("getMangas")) {
+        	Collection<OeuvreBean> mangas = facade.listeOeuvres();
+            String json = convertToJson(mangas);
+            sendJsonResponse(response, json);
+        }
+        else if (action.equals("getAuteurs")) {
+        	Collection<AuteurBean> auteurs = facade.listeAuteurs();
+            String json = convertToJson(auteurs);
+            sendJsonResponse(response, json);
+        }
+        else if (action.equals("addManga")) {
+        	
+        	OeuvreBean oeuvre = new OeuvreBean();
+    		try {
+    			oeuvre.setImage(new URL(request.getParameter("image")));
+    		} catch (MalformedURLException e) {
+    			e.printStackTrace();
+    		}
+    		oeuvre.setEditeur(facade.getEditeur(Integer.parseInt(request.getParameter("editeur"))));
+    		oeuvre.setParution(request.getParameter("parution"));
+    		oeuvre.setNombreTome(Integer.parseInt(request.getParameter("nombreTome")));
+    		oeuvre.setTitreFr(request.getParameter("titreFr"));
+    		oeuvre.setTitreVO(request.getParameter("titreVO"));	
+    		oeuvre.setAuteur(facade.getAuteur(Integer.parseInt(request.getParameter("auteur"))));
+    		oeuvre.setGenre(facade.getGenre(Integer.parseInt(request.getParameter("genre"))));
+    		facade.addOeuvre(oeuvre);
+
+        }
+        else if (action.equals("addAuteur")) {
+        	
+    		AuteurBean auteur = new AuteurBean();
+    		auteur.setGenre(Integer.parseInt(request.getParameter("genre")));
+    		auteur.setNaissance(request.getParameter("naissance"));
+    		auteur.setNationalite(request.getParameter("nationalite"));
+    		auteur.setNom(request.getParameter("nom"));
+    		facade.addAuteur(auteur);
+
+        }
+        else if (action.equals("addEditeur")) {
+        	
+    		EditeurBean edd = new EditeurBean();
+    		edd.setNom(request.getParameter("nom"));
+    		facade.addEditeur(edd);
+
+        }
+        else if (action.equals("addGenre")) {
+        	
+    		GenreBean genre = new GenreBean();
+    		genre.setNom(request.getParameter("nom"));
+    		genre.setDescription(request.getParameter("description"));
+    		facade.addGenre(genre);
+
+        }
+        else if (action.equals("addCompteUtilisateur")) {
+        	
+    		CompteUtilisateurBean ce = new CompteUtilisateurBean();
+    		ce.setPseudo(request.getParameter("pseudo"));
+    		ce.setInscription(request.getParameter("inscription"));
+    		ce.setMotDePassse(request.getParameter("motDePasse"));
+    		facade.addCompteUtilisateur(ce);
+
+        }
+        else if (action.equals("addNote")) {
+        	
+    		NoteBean note = new NoteBean();
+    		note.setCible(facade.getOeuvre(Integer.parseInt(request.getParameter("cible"))));
+    		note.setCompte(facade.getCompte(Integer.parseInt(request.getParameter("compte"))));
+    		note.setNote(Integer.parseInt(request.getParameter("note")));
+    		note.setDetail(request.getParameter("detail"));
+    		
+    		facade.addNote(note);
+
         }
 	}
 
