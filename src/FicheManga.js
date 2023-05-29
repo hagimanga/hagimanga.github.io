@@ -60,18 +60,18 @@ function FicheManga(props) {
                     <span className="attribute-value">{manga.editeur?.nom || "Non renseigné"}</span>
                 </div>
                 <div className="attribute">
-                    <span className="attribute-label">Auteurs:</span>
-                    <span className="attribute-value">{manga.auteurs.length > 0 ? manga.auteurs.map(auteur => <div key={auteur}>{auteur}</div>) : "Non renseigné"}</span>
+                    <span className="attribute-label">Auteur:</span>
+                    <span className="attribute-value">{manga.auteur?.nom || "Non renseigné"}</span>
                 </div>
                 <div className="attribute">
-                    <span className="attribute-label">Genres:</span>
-                    <span className="attribute-value">{manga.genres.length > 0 ? manga.genres.map(genre => <div key={genre}>{genre}</div>) : "Non renseigné"}</span>
+                    <span className="attribute-label">Genre:</span>
+                    <span className="attribute-value">{manga.genre?.nom || "Non renseigné"}</span>
                 </div>
             </div>
             <p className="manga-summary">{manga.resume}</p>
             <div className="notes-section">
             <h3>Notes</h3>
-            {manga.notes.length > 0 ? (
+            {/*manga.notes.length > 0 ? (
                 manga.notes.map(note => (
                 <div className="note" key={note.id}>
                     <span className="note-value">{note.note}</span>
@@ -80,7 +80,8 @@ function FicheManga(props) {
                 ))
             ) : (
                 <div className="no-notes">Aucune note disponible.</div>
-            )}
+            )*/}
+            <div className="no-notes">Aucune note disponible.</div>
             </div>
         </div>
     </div>

@@ -4,9 +4,9 @@ import './styles/ajoutDonnees.css';
 
 const AjoutDonnees = () => {
   return (
-    <div class="option-container">
+    <div className="option-container">
       <h2>Choisissez une option :</h2>
-      <ul class="option-list">
+      <ul className="option-list">
         <li><Link to="/ajout-manga">Ajouter un manga</Link></li>
         <li><Link to="/ajout-auteur">Ajouter un auteur</Link></li>
         <li><Link to="/ajout-editeur">Ajouter un éditeur</Link></li>

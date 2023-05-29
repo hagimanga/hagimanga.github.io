@@ -26,36 +26,47 @@ const AjoutManga = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    const formData = {
-      titreFr: event.target.elements['titreFr'].value,
-      titreVO: event.target.elements['titreVO'].value,
-      parution: event.target.elements['parution'].value,
-      nombreTome: event.target.elements['nombreTome'].value,
-      image: event.target.elements['image'].value,
-      resume: event.target.elements['resume'].value,
-      auteur: event.target.elements['auteur']['id'].value,
-      genre: event.target.elements['genre']['id'].value,
-      editeur: event.target.elements['editeur']['id'].value
-    };
+    const titreFr = event.target.elements['titreFr'].value;
+    const titreVO = event.target.elements['titreVO'].value;
+    const parution = event.target.elements['parution'].value;
+    const nombreTome = event.target.elements['nombreTome'].value;
+    const image = event.target.elements['image'].value;
+    const resume = event.target.elements['resume'].value;
+    const auteurId = event.target.elements['auteur']['id'].value;
+    const genreId = event.target.elements['genre']['id'].value;
+    const editeurId = event.target.elements['editeur']['id'].value;
 
-    console.log(JSON.stringify(formData));   
+    // Envoyer les données à l'API en utilisant l'URL avec les bons paramètres
+    const url = new URL('http://localhost:8080/Backend/API');
+    url.searchParams.append('action', 'addManga');
+    url.searchParams.append('titreFr', titreFr);
+    url.searchParams.append('titreVO', titreVO);
+    url.searchParams.append('parution', parution);
+    url.searchParams.append('nombreTome', nombreTome);
+    url.searchParams.append('image', image);
+    url.searchParams.append('resume', resume);
+    url.searchParams.append('auteurId', auteurId);
+    url.searchParams.append('genreId', genreId);
+    url.searchParams.append('editeurId', editeurId);
 
-    // Envoyer les données à l'API en utilisant fetch
-    fetch('http://localhost:8080/Backend/API?action=addManga', {
-      method: 'POST',
-      body: JSON.stringify(formData)
+    fetch(url, {
+    method: 'POST'
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      // Rediriger vers une autre page
-      history.push('/ajout-donnees');
+    .then(response => {
+    if (!response.ok) {
+        throw new Error('Une erreur s\'est produite lors de la requête.');
+    }        
+    // Traiter la réponse si nécessaire
+    console.log(url);
+    console.log('La requête a été envoyée avec succès.');
+    // Rediriger vers une autre page
+    history.push('/ajout-donnees');
     })
     .catch(error => {
-      console.error(error);
+    console.error(error);
     });
   };
-
+  
   return (
     <div>
         <h2>Ajouter un manga</h2>

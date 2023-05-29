@@ -13,7 +13,7 @@ const ListeMangas = () => {
   }, []);
 
   return (
-    <div class="gallery">
+    <div className="gallery">
         {listeMangas.map((manga, index) => (
           <MangaAccueilItem key={manga.id} manga={manga}/>
         ))}
