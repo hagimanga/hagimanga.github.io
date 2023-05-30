@@ -16,7 +16,7 @@ const TopAuteurs = () => {
     <div>
       <h1>Top 10 Auteurs</h1>
         <div className="item-container">
-        {topAuteurs.map((auteur, index) => (
+        {topAuteurs.slice(0, 10).map((auteur, index) => (
           <AuteurItem key={auteur.id} auteur={auteur} index={index + 1} />
         ))}
         </div>

@@ -5,7 +5,7 @@ import './styles/connexion.css';
 const Inscription = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const [registerStatus, setRegisterStatus] = useState('');
     const history = useHistory();
 
     const currentDate = new Date();
@@ -15,10 +15,10 @@ const Inscription = () => {
         event.preventDefault();
         // Envoyer les données à l'API en utilisant l'URL avec les bons paramètres
         const url = new URL('http://localhost:8080/Backend/API');
-        url.searchParams.append('action', 'addCompteUtilisateurs');
+        url.searchParams.append('action', 'addCompteUtilisateur');
         url.searchParams.append('pseudo', username);
-        url.searchParams.append('mdp', password);
-        url.searchParams.append('inscription', "13 février 2023, 5");
+        url.searchParams.append('motDePasse', password);
+        url.searchParams.append('inscription', "a");
 
         fetch(url, {
         method: 'GET'
@@ -34,6 +34,7 @@ const Inscription = () => {
         history.push('/connexion');
         })
         .catch(error => {
+        setRegisterStatus('Erreur: ce pseudo est déjà utilisé');
         console.log(url);
         console.error(error);
         });
@@ -62,6 +63,7 @@ const Inscription = () => {
                 <input type="button" value="Déjà inscrit ? C'est par ici" />
             </Link>
         </form>
+        {registerStatus && <p>{registerStatus}</p>}
         </div>
     );
 };
